@@ -1,14 +1,19 @@
-# Redux Reducer Injection Example
+## 논의사항
 
-This example shows how you can share your redux store across your remote app and inject dynamically a reducer.
+1. 어떤 요소까지 공유할것인지 (atoms, moluculs등)
+2. webpack5 이상만 가능
+3. 디펜던시 공유가능
+4. 부모앱이 터지면 다 터짐 -> s3같은 자산 저장소에 넣는 -> 그냥 ci/cd 넣어서 그 주소 가져가면 됨 -> 문제는 바뀐부분에 대해 pdp에 안알려줄수있음 ->
 
-- app1 is the host application that create the store and add `injectReducer` to the `store` object.
-- app2 is the remote application that inject in own reducer to the store that was passed by the props by `app1`
+## 방향성
 
-# Running Demo
+1. npm에 올리는방법 (매번 패치해야하고의존성 충돌)
+2. s3에 코드를 올리는 방법 (해야할게 많음)
+3. iframe - fuck
+4. federation - home에서 header, footer 컴포넌트 업뎃하면 다른 앱도 자동으로 업됨,
 
-1. `yarn install && yarn start`
-2. Browse to localhost:3001
+## state
 
-You should see a `Welcome to Host App` and a `button`
-<img src="https://ssl.google-analytics.com/collect?v=1&t=event&ec=email&ea=open&t=event&tid=UA-120967034-1&z=1589682154&cid=ae045149-9d17-0367-bbb0-11c41d92b411&dt=ModuleFederationExamples&dp=/email/ReduxReducerInjection">
+1. 서로 공유하지 않는게 가장 중요함
+2. 같은 포트면 state 공유가능
+3. 다른 포트면 federation으로는 공유 불가능
